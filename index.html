@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VibePulse — Global Beats Music Hub</title>
+<meta name="description" content="VibePulse is a late-night music hub for English, Urdu, Hindi and Phonk playlists. Pick a mood, press play, and keep the vibe going.">
+<meta name="theme-color" content="#121317">
+<meta name="color-scheme" content="dark">
+<meta property="og:title" content="VibePulse — Global Beats Music Hub">
+<meta property="og:description" content="Curated English, Urdu, Hindi and Phonk playlists with a real player.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23121317'/%3E%3Cpath d='M8 20c2-9 4-9 6 0s4 9 6 0 3-6 4-4' fill='none' stroke='%234cd7f6' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#view">Skip to content</a>
+
+<header class="topbar">
+  <a class="brand" href="#/home">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text">Vibe<em>Pulse</em></span>
+  </a>
+
+  <nav class="mainnav" id="mainnav" aria-label="Main"></nav>
+
+  <div class="topbar-tools">
+    <button class="icon-btn" id="searchToggle" type="button" aria-label="Search songs">
+      <span class="ic" data-icon="search" aria-hidden="true"></span>
+    </button>
+    <button class="chip-btn" id="surpriseBtn" type="button">
+      <span class="ic" data-icon="spark" aria-hidden="true"></span>
+      <span class="hide-sm">Surprise Me</span>
+    </button>
+    <a class="avatar-btn" href="#/library" aria-label="My library">
+      <span class="ic" data-icon="person" aria-hidden="true"></span>
+    </a>
+  </div>
+</header>
+
+<main id="view" class="view" tabindex="-1"></main>
+
+<footer class="sitefoot">
+  <div class="foot-inner">
+    <p class="foot-brand">VibePulse <span>— Late-Night Sonic Sanctuary</span></p>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="#/info/terms">Terms</a>
+      <a href="#/info/privacy">Privacy</a>
+      <a href="#/info/music-setup">Music Setup</a>
+      <a href="#/info/support">Support</a>
+    </nav>
+    <p class="foot-note">Playlist ideas and artwork from your own library. Streaming links open the official sources.</p>
+  </div>
+</footer>
+
+<div class="dock" id="dock" hidden>
+  <div class="dock-progress"><div class="dock-progress-fill" id="dockFill"></div></div>
+  <div class="dock-body">
+    <div class="dock-track">
+      <div class="dock-art" id="dockArt" aria-hidden="true"></div>
+      <div class="dock-meta">
+        <strong id="dockTitle">—</strong>
+        <span id="dockArtist">—</span>
+      </div>
+      <button class="icon-btn like-btn" id="dockLike" type="button" aria-label="Save this song"><span class="ic" data-icon="heart" aria-hidden="true"></span></button>
+    </div>
+
+    <div class="dock-controls">
+      <div class="dock-buttons">
+        <button class="icon-btn" id="shuffleBtn" type="button" aria-label="Shuffle"><span class="ic" data-icon="shuffle" aria-hidden="true"></span></button>
+        <button class="icon-btn" id="prevBtn" type="button" aria-label="Previous song"><span class="ic" data-icon="prev" aria-hidden="true"></span></button>
+        <button class="play-btn" id="playBtn" type="button" aria-label="Play or pause"><span class="ic" data-icon="play" aria-hidden="true"></span></button>
+        <button class="icon-btn" id="nextBtn" type="button" aria-label="Next song"><span class="ic" data-icon="next" aria-hidden="true"></span></button>
+        <button class="icon-btn" id="repeatBtn" type="button" aria-label="Repeat"><span class="ic" data-icon="repeat" aria-hidden="true"></span></button>
+      </div>
+      <div class="dock-time">
+        <span id="curTime">0:00</span>
+        <input id="seek" class="range seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek inside the song">
+        <span id="totTime">0:00</span>
+      </div>
+    </div>
+
+    <div class="dock-right">
+      <button class="icon-btn" id="queueBtn" type="button" aria-label="Open queue"><span class="ic" data-icon="queue" aria-hidden="true"></span></button>
+      <span class="ic vol-ic" data-icon="volume" aria-hidden="true"></span>
+      <input id="volume" class="range vol" type="range" min="0" max="100" value="80" aria-label="Volume">
+      <button class="icon-btn" id="expandBtn" type="button" aria-label="Full screen player"><span class="ic" data-icon="expand" aria-hidden="true"></span></button>
+    </div>
+  </div>
+</div>
+
+<div class="notice" id="notice" hidden></div>
+
+<div class="drawer" id="queueDrawer" hidden>
+  <div class="drawer-head">
+    <h2>Up next</h2>
+    <button class="icon-btn" id="queueClose" type="button" aria-label="Close queue"><span class="ic" data-icon="close" aria-hidden="true"></span></button>
+  </div>
+  <div class="drawer-body" id="queueBody"></div>
+</div>
+
+<div class="sheet" id="nowPlaying" hidden>
+  <button class="sheet-close icon-btn" id="npClose" type="button" aria-label="Close full screen player"><span class="ic" data-icon="close" aria-hidden="true"></span></button>
+  <div class="np-inner" id="npInner"></div>
+</div>
+
+<div class="sheet search-sheet" id="searchSheet" hidden>
+  <div class="search-box">
+    <span class="ic" data-icon="search" aria-hidden="true"></span>
+    <input id="searchInput" type="search" placeholder="Search songs, artists, playlists…" autocomplete="off">
+    <button class="icon-btn" id="searchClose" type="button" aria-label="Close search"><span class="ic" data-icon="close" aria-hidden="true"></span></button>
+  </div>
+  <div class="search-body" id="searchBody"></div>
+</div>
+
+<div class="sr-live" id="liveRegion" role="status" aria-live="polite"></div>
+
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
